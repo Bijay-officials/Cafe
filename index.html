@@ -1512,7 +1512,7 @@
       html { font-size: 14px; }
 
       /* Mobile header 下げる + nav-container 左寄せ */
-      header { padding: 22px 0 16px; }
+      header { padding: 10px 0 16px; }
       body.page-mode header { padding: 16px 0 12px; }
       .nav-container { padding: 0 8px; gap: 8px; }
       .logo { gap: 8px; }
@@ -2355,7 +2355,7 @@
       });
     }
 
-    (function splitHeroTitle() {
+        (function splitHeroTitle() {
       const title = document.getElementById('heroTitle');
       if (!title) return;
       const text = title.textContent;
@@ -2367,6 +2367,13 @@
         span.textContent = ch === ' ' ? '\u00A0' : ch;
         span.style.animationDelay = (0.35 + i * 0.04) + 's';
         title.appendChild(span);
+
+        // 「、」の後に mobile 専用改行を挿入
+        if (ch === '、') {
+          const br = document.createElement('br');
+          br.className = 'title-break';
+          title.appendChild(br);
+        }
       });
     })();
 
