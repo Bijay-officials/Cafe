@@ -802,8 +802,10 @@
       background: var(--color-accent-light);
     }
 
-    /* MENU */
-    .menu-section { padding: 36px 36px 32px !important; }
+       /* ============================================================
+       MENU — 和風リスト型
+       ============================================================ */
+    .menu-section { padding: 36px 40px 32px !important; }
     .menu-section .section-header { margin-bottom: 20px; }
 
     .notice-box {
@@ -814,7 +816,7 @@
       margin-bottom: 18px;
       font-size: 0.88rem;
       color: var(--color-primary-deep);
-      text-align: left;
+      text-align: center;
       position: relative; overflow: hidden;
     }
     .page-visible .notice-box {
@@ -836,7 +838,7 @@
     .menu-categories {
       display: flex; justify-content: center;
       gap: 8px; flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       opacity: 0;
     }
     .page-visible .menu-categories {
@@ -882,24 +884,33 @@
       border-color: var(--color-primary);
     }
 
+    /*menu/* ★ 和風リスト型 */
     .recommend-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px; margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 0;
     }
+
     .recommend-card {
       position: relative;
-      display: flex; flex-direction: column;
-      background: linear-gradient(135deg, #FFFFFF 0%, #FBF7F3 100%);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      overflow: hidden; text-align: left;
-      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 4px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px dashed var(--color-border);
+      border-radius: 0;
+      overflow: visible;
+      text-align: left;
+      transition: background 0.35s ease, padding-left 0.35s ease;
     }
-    .recommend-card.hide { display: none; }
+    .recommend-card:last-child { border-bottom: none; }
+    .recommend-card.hide { display: none !important; }
 
     .page-visible .recommend-card {
-      animation: menuCardRise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation: menuListItemIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
     .page-visible .recommend-card:nth-child(1) { animation-delay: 0.55s; }
     .page-visible .recommend-card:nth-child(2) { animation-delay: 0.62s; }
@@ -907,125 +918,141 @@
     .page-visible .recommend-card:nth-child(4) { animation-delay: 0.76s; }
     .page-visible .recommend-card:nth-child(5) { animation-delay: 0.83s; }
 
-    @keyframes menuCardRise {
-      from { opacity: 0; transform: translateY(30px) scale(0.98); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes menuListItemIn {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0); }
     }
 
-    .recommend-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
-      transform: scaleX(0);
-      transform-origin: left center;
-      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 3;
-    }
-    .recommend-card:hover::before { transform: scaleX(1); }
+    .recommend-card::before { display: none; }
 
     .recommend-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--color-accent-light);
+      background: linear-gradient(90deg, rgba(194, 139, 89, 0.08), transparent 80%);
+      padding-left: 12px;
     }
 
     .card-photo-container {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      position: relative;
+      width: 76px;
+      min-width: 76px;
+      height: 76px;
+      aspect-ratio: auto;
+      border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 3px 10px rgba(74, 59, 50, 0.10);
+      flex-shrink: 0;
+      position: relative;
       background: #EFE6DF;
-      isolation: isolate;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
+    .recommend-card:hover .card-photo-container {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(74, 59, 50, 0.16);
+    }
+    .card-photo-container::before { display: none; }
+
     .card-real-img {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
-      transform: scale(1.001);
-      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-      will-change: transform, filter;
+      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
     }
     .recommend-card:hover .card-real-img {
       transform: scale(1.08);
-      filter: brightness(1.05) saturate(1.12);
+      filter: brightness(1.05) saturate(1.1);
     }
-    .card-photo-container::before {
-      content: "";
-      position: absolute;
-      top: -60%; left: -80%;
-      width: 45%; height: 220%;
-      background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.05) 35%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.05) 65%, transparent 100%);
-      transform: skewX(-22deg);
-      pointer-events: none; z-index: 3;
-      transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .recommend-card:hover .card-photo-container::before { left: 130%; }
 
     .card-cat-label {
       position: absolute;
-      top: 9px; left: 9px;
-      padding: 4px 9px;
-      border-radius: var(--radius-full);
+      top: 4px; left: 4px;
+      padding: 2px 6px;
+      border-radius: 4px;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(6px);
-      font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.1em;
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--color-primary-dark);
       z-index: 2;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
     .card-info {
-      padding: 12px 14px 14px;
-      display: flex; flex-direction: column;
-      flex: 1; position: relative;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 0;
+      min-width: 0;
+      position: relative;
     }
+
     .recommend-card h3 {
       font-family: var(--font-serif);
-      font-size: 1rem; font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 600;
       color: var(--color-primary-deep);
-      margin-bottom: 4px;
+      margin: 0;
       letter-spacing: 0.02em;
-      transition: color 0.4s ease;
-      line-height: 1.35;
+      line-height: 1.4;
+      display: flex;
+      align-items: baseline;
+      width: 100%;
+      transition: color 0.3s ease;
     }
     .recommend-card:hover h3 { color: var(--color-accent); }
 
-    .card-desc {
-      font-size: 0.72rem; line-height: 1.55;
-      color: var(--color-text-muted);
-      margin-bottom: 10px;
+    .recommend-card h3::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px dotted var(--color-border);
+      margin: 0 8px 4px;
+      min-width: 16px;
+      order: 1;
     }
 
     .card-price {
-      display: flex; align-items: baseline;
-      gap: 3px; margin-top: auto;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+      margin-top: 0;
+      flex-shrink: 0;
+      white-space: nowrap;
+      order: 2;
     }
     .card-price .price-num {
       font-family: var(--font-serif);
-      font-size: 1.15rem; font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 600;
       color: var(--color-primary);
       letter-spacing: 0.01em;
-      transition: color 0.4s ease, transform 0.4s ease;
+      transition: color 0.3s ease, transform 0.3s ease;
       display: inline-block;
     }
     .card-price .price-cur {
-      font-size: 0.7rem; font-weight: 500;
+      font-size: 0.68rem;
+      font-weight: 500;
       color: var(--color-text-muted);
       letter-spacing: 0.05em;
     }
     .card-price .price-tax {
-      font-size: 0.62rem; font-weight: 500;
+      font-size: 0.58rem;
+      font-weight: 500;
       color: var(--color-text-muted);
       letter-spacing: 0.04em;
-      margin-left: 3px; line-height: 1;
+      margin-left: 2px;
+      line-height: 1;
     }
     .recommend-card:hover .card-price .price-num {
       color: var(--color-accent);
-      transform: translateY(-2px);
+      transform: translateY(-1px);
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: var(--color-text-muted);
+      margin: 4px 0 0;
+      font-family: var(--font-sans);
     }
 
     .menu-empty {
@@ -1576,7 +1603,8 @@
       .about-sub-photo .sub-caption .cap-title { font-size: 0.7rem; }
       .about-signature { margin-top: 18px; font-size: 0.76rem; }
 
-      .menu-section { padding: 22px 16px 20px !important; }
+       /* Mobile Menu — 和風リスト型 */
+      .menu-section { padding: 22px 14px 20px !important; }
       .menu-section .section-header { margin-bottom: 14px; }
       .menu-section h2 { font-size: 1.25rem; }
       .menu-section h2::after { width: 28px; margin-top: 8px; }
@@ -1589,7 +1617,7 @@
         border-left-width: 3px;
       }
 
-      .menu-categories { gap: 4px; margin-bottom: 10px; }
+      .menu-categories { gap: 4px; margin-bottom: 14px; }
       .menu-cat {
         padding: 4px 10px;
         font-size: 0.6rem;
@@ -1598,53 +1626,39 @@
       }
       .menu-cat .dot { width: 4px; height: 4px; }
 
-      .recommend-grid { grid-template-columns: 1fr; gap: 6px; }
+      .recommend-grid { gap: 0; }
 
       .recommend-card {
-        flex-direction: row;
-        align-items: stretch;
-        min-height: 62px;
-        border-radius: 10px;
+        gap: 11px;
+        padding: 11px 2px;
       }
-      .recommend-card::before { display: none; }
+      .recommend-card:hover { padding-left: 6px; }
 
       .card-photo-container {
-        width: 62px;
-        min-width: 62px;
-        height: 62px;
-        aspect-ratio: auto;
-        border-radius: 0;
-        flex-shrink: 0;
+        width: 60px;
+        min-width: 60px;
+        height: 60px;
+        border-radius: 8px;
       }
-      .card-photo-container::before { display: none; }
 
       .card-cat-label {
         font-size: 0.42rem;
-        padding: 2px 5px;
+        padding: 2px 4px;
         top: 3px; left: 3px;
-        letter-spacing: 0.05em;
-        border-radius: 4px;
-      }
-
-      .card-info {
-        padding: 6px 10px 6px 10px;
-        justify-content: center;
-        gap: 1px;
+        border-radius: 3px;
       }
 
       .recommend-card h3 {
-        font-size: 0.78rem;
-        margin-bottom: 0;
-        line-height: 1.25;
-        letter-spacing: 0.01em;
+        font-size: 0.88rem;
+        line-height: 1.35;
       }
+      .recommend-card h3::after { margin: 0 6px 3px; }
 
-      .card-desc { display: none; }
+      .card-price .price-num { font-size: 0.9rem; }
+      .card-price .price-cur { font-size: 0.6rem; }
+      .card-price .price-tax { font-size: 0.52rem; margin-left: 1px; }
 
-      .card-price { margin-top: 2px; gap: 2px; }
-      .card-price .price-num { font-size: 0.85rem; }
-      .card-price .price-cur { font-size: 0.55rem; }
-      .card-price .price-tax { font-size: 0.5rem; margin-left: 2px; }
+      .card-desc { font-size: 0.66rem; line-height: 1.55; margin-top: 2px; }
 
       .menu-empty { font-size: 0.68rem; padding: 16px 10px; }
 
@@ -2008,7 +2022,7 @@
         </div>
       </section>
 
-      <section class="menu-section site-page-section" id="menu">
+            <section class="menu-section site-page-section" id="menu">
         <div class="section-header">
           <div class="section-kicker">Menu Selection</div>
           <h2>メニュー</h2>
@@ -2032,13 +2046,8 @@
               <img class="card-real-img" src="blend.jpg" alt="こもれびブレンド">
             </div>
             <div class="card-info">
-              <h3>こもれびブレンド</h3>
+              <h3>こもれびブレンド<span class="card-price"><span class="price-num">550</span><span class="price-cur">円</span><span class="price-tax">（税込）</span></span></h3>
               <p class="card-desc">深煎り豆をていねいにドリップ。</p>
-              <div class="card-price">
-                <span class="price-num">550</span>
-                <span class="price-cur">円</span>
-                <span class="price-tax">（税込）</span>
-              </div>
             </div>
           </div>
 
@@ -2048,13 +2057,8 @@
               <img class="card-real-img" src="cafelatte.webp" alt="カフェラテ">
             </div>
             <div class="card-info">
-              <h3>カフェラテ</h3>
+              <h3>カフェラテ<span class="card-price"><span class="price-num">620</span><span class="price-cur">円</span><span class="price-tax">（税込）</span></span></h3>
               <p class="card-desc">ミルクとエスプレッソの香ばしさ。</p>
-              <div class="card-price">
-                <span class="price-num">620</span>
-                <span class="price-cur">円</span>
-                <span class="price-tax">（税込）</span>
-              </div>
             </div>
           </div>
 
@@ -2064,13 +2068,8 @@
               <img class="card-real-img" src="lemon.jpg" alt="自家製レモネード">
             </div>
             <div class="card-info">
-              <h3>自家製レモネード</h3>
+              <h3>自家製レモネード<span class="card-price"><span class="price-num">580</span><span class="price-cur">円</span><span class="price-tax">（税込）</span></span></h3>
               <p class="card-desc">国産レモンの爽やかな甘さ。</p>
-              <div class="card-price">
-                <span class="price-num">580</span>
-                <span class="price-cur">円</span>
-                <span class="price-tax">（税込）</span>
-              </div>
             </div>
           </div>
 
@@ -2080,13 +2079,8 @@
               <img class="card-real-img" src="cake.jpg" alt="季節のチーズケーキ">
             </div>
             <div class="card-info">
-              <h3>季節のチーズケーキ</h3>
+              <h3>季節のチーズケーキ<span class="card-price"><span class="price-num">680</span><span class="price-cur">円</span><span class="price-tax">（税込）</span></span></h3>
               <p class="card-desc">旬のフルーツを添えて。</p>
-              <div class="card-price">
-                <span class="price-num">680</span>
-                <span class="price-cur">円</span>
-                <span class="price-tax">（税込）</span>
-              </div>
             </div>
           </div>
 
@@ -2096,13 +2090,8 @@
               <img class="card-real-img" src="sucon.jpg" alt="焼きたてスコーン">
             </div>
             <div class="card-info">
-              <h3>焼きたてスコーン</h3>
+              <h3>焼きたてスコーン<span class="card-price"><span class="price-num">420</span><span class="price-cur">円</span><span class="price-tax">（税込）</span></span></h3>
               <p class="card-desc">外はさっくり、中はしっとり。</p>
-              <div class="card-price">
-                <span class="price-num">420</span>
-                <span class="price-cur">円</span>
-                <span class="price-tax">（税込）</span>
-              </div>
             </div>
           </div>
         </div>
@@ -2468,6 +2457,7 @@
       if (document.getElementById(targetId)) showPage(targetId, false);
     });
 
+        /* Menu Filter — robust */
     (function initMenuFilter() {
       const cats = document.querySelectorAll('.menu-cat');
       const cards = document.querySelectorAll('.recommend-card');
@@ -2477,24 +2467,30 @@
       function applyFilter(filter) {
         let visibleCount = 0;
         cards.forEach(card => {
-          const category = card.dataset.category || '';
+          const category = (card.dataset.category || '').trim();
           const show = (filter === 'all') || (category === filter);
-          card.classList.toggle('hide', !show);
-          if (show) visibleCount++;
+          if (show) {
+            card.classList.remove('hide');
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.classList.add('hide');
+            card.style.display = 'none';
+          }
         });
-        if (emptyMsg) {
-          emptyMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
-        }
+        if (emptyMsg) emptyMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
       }
 
       cats.forEach(cat => {
-        cat.addEventListener('click', () => {
-          const filter = cat.dataset.filter || 'all';
+        cat.addEventListener('click', (e) => {
+          e.preventDefault();
+          const filter = (cat.dataset.filter || 'all').trim();
           cats.forEach(c => c.classList.remove('active'));
           cat.classList.add('active');
           applyFilter(filter);
         });
       });
+      applyFilter('all');
     })();
 
     (function initKomorebi() {
