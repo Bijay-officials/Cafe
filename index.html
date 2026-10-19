@@ -65,6 +65,9 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
     }
 
     body::before {
@@ -427,7 +430,7 @@
 
     .hero h1 {
       font-family: var(--font-sans);
-      font-size: 4.2rem; font-weight: 800; line-height: 1.15;
+      font-size: 3rem; font-weight: 800; line-height: 1.15;
       color: #FFFDF9; margin-bottom: 28px;
       letter-spacing: 0.005em;
       text-shadow: 0 4px 16px rgba(0, 0, 0, 0.55), 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -986,19 +989,19 @@
       position: relative;
     }
 
-    .recommend-card h3 {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--color-primary-deep);
-      margin: 0;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-      display: flex;
-      align-items: baseline;
-      width: 100%;
-      transition: color 0.3s ease;
-    }
+.recommend-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;              /* ← 600 → 700 (bold) */
+  color: #1A1A1A;                /* ← primary-deep → near-black */
+  margin: 0;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  transition: color 0.3s ease;
+}
     .recommend-card:hover h3 { color: var(--color-accent); }
 
     .recommend-card h3::after {
@@ -1019,15 +1022,15 @@
       white-space: nowrap;
       order: 2;
     }
-    .card-price .price-num {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--color-primary);
-      letter-spacing: 0.01em;
-      transition: color 0.3s ease, transform 0.3s ease;
-      display: inline-block;
-    }
+   .card-price .price-num {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;              /* ← 600 → 700 */
+  color: #1A1A1A;                /* ← primary → near-black */
+  letter-spacing: 0.01em;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
     .card-price .price-cur {
       font-size: 0.68rem;
       font-weight: 500;
@@ -1047,13 +1050,14 @@
       transform: translateY(-1px);
     }
 
-    .card-desc {
-      font-size: 0.78rem;
-      line-height: 1.6;
-      color: var(--color-text-muted);
-      margin: 4px 0 0;
-      font-family: var(--font-sans);
-    }
+.card-desc {
+  font-size: 0.78rem;
+  font-weight: 500;              /* ← थप्नुहोस् */
+  line-height: 1.6;
+  color: #3A3A3A;                /* ← muted → dark gray */
+  margin: 4px 0 0;
+  font-family: var(--font-sans);
+}
 
     .menu-empty {
       display: none; text-align: center;
@@ -1525,7 +1529,7 @@
 
     /* RESPONSIVE — Tablet */
     @media (max-width: 1024px) {
-      .hero h1 { font-size: 3.2rem; }
+      .hero h1 { font-size: 2.6rem; }
       .nav-container { padding: 0 20px; }
       .nav-menu { gap: 2px; }
       .nav-menu a { font-size: 0.78rem; padding: 7px 9px; }
@@ -1578,7 +1582,7 @@
       }
       .hero-kicker { font-size: 0.6rem; margin-bottom: 12px; letter-spacing: 0.18em; }
       .hero-kicker .kicker-icon { width: 14px; height: 14px; }
-      .hero h1 { font-size: 1.85rem; margin-bottom: 12px; line-height: 1.25; }
+      .hero h1 { font-size: 1.25rem; margin-bottom: 12px; line-height: 1.25; }
       .hero p { font-size: 0.8rem; line-height: 1.75; margin-bottom: 18px; max-width: 100%; }
       .hero-actions { gap: 8px; }
       .hero .btn-primary,
@@ -2290,17 +2294,7 @@
     </div>
 
     <footer>
-      <div class="footer-container">
-        <div class="footer-brand">喫茶こもれび</div>
-        <ul class="footer-nav">
-          <li><a href="#top">トップ</a></li>
-          <li><a href="#about">お店について</a></li>
-          <li><a href="#menu">メニュー</a></li>
-          <li><a href="#access">アクセス・営業時間</a></li>
-          <li><a href="#contact">お問い合わせ</a></li>
-        </ul>
         <p>&copy; 喫茶こもれび All Rights Reserved.</p>
-      </div>
     </footer>
   </div>
 
@@ -2627,7 +2621,7 @@
       heroSlides[heroCurrent].classList.remove('active');
       heroCurrent = (heroCurrent + 1) % heroSlides.length;
       heroSlides[heroCurrent].classList.add('active');
-    }, 5000);
+    }, 3000);
   </script>
 
 </body>
