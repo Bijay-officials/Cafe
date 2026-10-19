@@ -963,21 +963,20 @@
       transform: scale(1.08);
       filter: brightness(1.05) saturate(1.1);
     }
-
     .card-cat-label {
       position: absolute;
-      top: 4px; left: 4px;
-      padding: 2px 6px;
-      border-radius: 4px;
+      top: 3px; left: 3px;                  /* अलि नजिक */
+      padding: 1px 4px;                     /* प्याडिङ कम */
+      border-radius: 3px;
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(6px);
-      font-size: 0.52rem;
+      font-size: 0.32rem;                   /* 0.52 → 0.42 (सानो) */
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;               /* 0.08 → 0.05 */
       text-transform: uppercase;
       color: var(--color-primary-dark);
       z-index: 2;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     }
 
     .card-info {
@@ -1645,11 +1644,12 @@
         border-radius: 8px;
       }
 
-      .card-cat-label {
-        font-size: 0.42rem;
-        padding: 2px 4px;
-        top: 3px; left: 3px;
-        border-radius: 3px;
+          .card-cat-label {
+        font-size: 0.32rem;                 /* 0.42 → 0.32 (झन् सानो) */
+        padding: 1px 3px;                   /* प्याडिङ कम */
+        top: 2px; left: 2px;                /* कुनामा नजिक */
+        border-radius: 2px;
+        letter-spacing: 0.03em;
       }
 
       .recommend-card h3 {
